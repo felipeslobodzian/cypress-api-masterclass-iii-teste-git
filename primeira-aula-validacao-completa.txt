@@ -1,0 +1,94 @@
+/// <reference types="cypress"/> 
+
+// funcionalidade
+describe("Buscar agendamentos", () => {
+  it("Buscar agendamento com sucesso", () => {
+    
+    cy.request({
+        method: 'POST',
+        url: 'https://restful-booker.herokuapp.com/booking',
+        body: {
+            firstname: "Felipe",
+            lastname: "Slobodzian",
+            totalprice: 777,
+            depositpaid: false,
+            bookingdates: {
+                checkin: "2025-01-19",
+                checkout: "2025-01-20"
+            },
+            additionalneeds: "Café",
+        },
+    });
+
+    cy.request({
+        method: "GET",
+        url: "https://restful-booker.herokuapp.com/booking/19",
+        failOnStatusCode: false
+    })
+        .then((response) => {
+            expect(response.body.additionalneeds).to.equal("midnight snack");
+            expect(response.body.bookingdates.checkin).to.equal("2018-01-01");
+            expect(response.body.bookingdates.checkout).to.equal("2019-01-01");
+            expect(response.body.depositpaid).to.be.true;
+            expect(response.body.firstname).to.equal("Josh");
+            expect(response.body.lastname).to.equal("Allen");
+            expect(response.body.totalprice).to.equal(111);
+            expect(response.status).to.equal(200);
+        });
+
+  });
+
+  it("Buscar agendamento inexistente com letras", () => {
+
+    cy.request({
+        method: "GET",
+        url: "https://restful-booker.herokuapp.com/booking/sdfgsdfgsd",
+        failOnStatusCode: false
+    })
+        .then((response) => {
+            expect(response.status).to.equal(404);
+            expect(response.body).to.equal("Not Found");
+        });
+
+  });
+
+  it("Buscar agendamento nulo", () => {
+
+    cy.request({
+        method: "GET",
+        url: "https://restful-booker.herokuapp.com/booking/null",
+        failOnStatusCode: false
+    })
+        .then((response) => {
+            expect(response.status).to.equal(404);
+        });
+
+  });
+
+  it("Buscar agendamento inexistente com números", () => {
+
+    cy.request({
+        method: "GET",
+        url: "https://restful-booker.herokuapp.com/booking/44444444",
+        failOnStatusCode: false
+    })
+        .then((response) => {
+            expect(response.status).to.equal(404);
+        });
+
+  });
+
+  it("Buscar agendamento inexistente com 2 números e depois letras", () => {
+
+    cy.request({
+        method: "GET",
+        url: "https://restful-booker.herokuapp.com/booking/19sdfsdaf",
+         failOnStatusCode: false
+     })
+        .then((response) => {
+            expect(response.status).to.equal(200);
+        });
+
+  });
+
+});

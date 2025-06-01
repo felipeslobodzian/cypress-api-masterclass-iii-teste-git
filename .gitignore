@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dependências locais
+.env
+.env.*
+
+# Cache de testes Cypress
+cypress/screenshots/
+cypress/videos/
+
+# Build gerado
+dist/
+build/
+
+# Arquivos do editor
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.swp
+*.swo
+*.tmp
+
+# Lock files (se você quiser manter apenas um deles)
+# Se usa npm, mantenha package-lock.json e ignore yarn.lock e pnpm-lock.yaml, ou vice-versa
+# yarn.lock
+# pnpm-lock.yaml
