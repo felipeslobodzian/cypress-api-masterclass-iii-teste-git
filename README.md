@@ -17,8 +17,8 @@ Este repositório contém uma suíte de testes automatizados utilizando [Cypress
 
 - [Cypress](https://www.cypress.io) – Framework de testes de front-end e API  
 - [Faker.js](https://fakerjs.dev/) – Geração de dados aleatórios realistas  
-- JavaScript ES6+
-
+- JavaScript
+  
 ---
 
 ## 📁 Estrutura dos Testes
