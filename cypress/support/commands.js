@@ -47,3 +47,25 @@ Cypress.Commands.add("buscarTodosIds", () => {
         failOnStatusCode: false,
     });
 });
+
+Cypress.Commands.add("criarToken", () => {
+    cy.request({
+        method: 'POST',
+        url: 'https://restful-booker.herokuapp.com/auth',
+        body: {
+          username: 'admin',
+          password: 'password123'
+        }
+      })
+});
+
+Cypress.Commands.add("deletarAgendamento", (id, token) => {
+    cy.request({
+        method: "DELETE",
+        url: `https://restful-booker.herokuapp.com/booking/${id}`,
+        headers: {
+            Cookie: `token=${token}`
+        },
+        failOnStatusCode: false,
+    });
+});
